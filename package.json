@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./lessons/path.js"
+    "start": "cross-env TEXT=\"text1 text2 text3 text4\" node ./lessons/file-system.js"
   },
   "author": "",
   "license": "ISC",
