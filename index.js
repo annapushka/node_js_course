@@ -1,5 +1,11 @@
 const crypto = require('crypto');
 
+const dotenv = require('dotenv');
+
+dotenv.config();
+console.log(process.env.PORT);
+console.log(process.env.NODE_ENV);
+
 const start = Date.now();
 
 crypto.pbkdf2('123ttt', '5', 1000000, 64, 'sha512', () => {
