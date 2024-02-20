@@ -44,23 +44,14 @@
 // });
 
 
-
-const Router = require('./framework/Router.js');
 const Application = require('./framework/Application.js');
+const router = require('./src/user-router.js');
+const jsonParser = require('./framework/parseJson.js');
 
 const PORT = process.env.PORT || 3000;
-
-const router = new Router();
 const app = new Application();
 
-router.get('/main', (req, res) => {
-    res.end('You send request to /main');
-});
-
-router.get('/about', (req, res) => {
-    res.end('You send request to /about');
-});
-
+app.use(jsonParser);
 app.addRouter(router);
 
 app.listen(PORT, () => console.log(`Server started on PORT ${PORT}`));
