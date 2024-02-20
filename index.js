@@ -28,14 +28,6 @@
 //     console.log('5 end', Date.now() - start)
 // });
 
-const http = require('http');
-const EventEmitter = require('events');
-const Router = require('./framework/Router.js');
-
-const emmiter = new EventEmitter();
-
-const PORT = process.env.PORT || 3000;
-
 // const server = http.createServer((req, res) => {
 //     res.writeHead(200, {
 //         'Content-Type': 'text/html'
@@ -52,7 +44,14 @@ const PORT = process.env.PORT || 3000;
 // });
 
 
+
+const Router = require('./framework/Router.js');
+const Application = require('./framework/Application.js');
+
+const PORT = process.env.PORT || 3000;
+
 const router = new Router();
+const app = new Application();
 
 router.get('/main', (req, res) => {
     res.end('You send request to /main');
@@ -62,12 +61,6 @@ router.get('/about', (req, res) => {
     res.end('You send request to /about');
 });
 
+app.addRouter(router);
 
-const server = http.createServer((req, res) => {
-    const emmited = emmiter.emit(`[${req.url}]:[${req.method}]`, req, res);
-    if(!emmited) {
-        res.end('404');
-    }
-})
-
-server.listen(PORT, () => console.log(`Server started on PORT ${PORT}`));
+app.listen(PORT, () => console.log(`Server started on PORT ${PORT}`));
