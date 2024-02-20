@@ -1,24 +1,18 @@
-const users = [
-    {
-        id: 1,
-        name: 'John Doe',
-    },
-    {
-        id: 2,
-        name: 'Jane Banana',
-    }
-]
+const User = require('./user-model');
 
-const getUser = (req, res) => {
+const getUser = async (req, res) => {
+    let users;
     if(req.params.id) {
-        res.send(users.find(user => user.id === +req.params.id));
+        users = await User.findById(req.params.id);
+    } else {
+        users = await User.find();
     }
     res.send(users);
 }
 
-const addUser = (req, res) => {
+const addUser = async (req, res) => {
     const user = req.body;
-    users.push(user);
+    await User.create(user);
     res.send(user);
 }
 
