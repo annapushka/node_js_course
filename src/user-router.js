@@ -1,20 +1,10 @@
 const Router = require('../framework/Router');
+const { getUser, addUser } = require('./user-controller');
 
 const router = new Router();
 
-const users = [
-    {
-        id: 1,
-        name: 'Alex'
-    },
-    {
-        id: 2,
-        name: 'Vlad'
-    }
-]
+router.get('/users', getUser);
 
-router.get('/users', (req, res) => {
-    res.send(users);
-});
+router.post('/users', addUser);
 
 module.exports = router;
